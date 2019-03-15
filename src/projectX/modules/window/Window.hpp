@@ -2,8 +2,10 @@
 
 #include <SFML/Graphics.hpp>
 
+#include "../../utility/Module.hpp"
+
 namespace px {
-	class Window {
+	class Window : public Module<> {
 	public:
 		Window() {}
 		void init(unsigned int width, unsigned int height, const std::string& title);
