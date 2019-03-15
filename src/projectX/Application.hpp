@@ -2,9 +2,9 @@
 
 #include <SFML/Graphics.hpp>
 
-#include "utility/ModulesHolder.hpp"
+#include "projectX/utility/ModulesHolder.hpp"
 
-#include "modules/window/Window.hpp"
+#include "projectX/modules/window/Window.hpp"
 
 namespace px {
 

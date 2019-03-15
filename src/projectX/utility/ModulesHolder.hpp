@@ -1,12 +1,17 @@
 #pragma once
 
 #include <tuple>
-#include "TupleForEach.hpp"
+
+#include "projectX/utility/TupleForEach.hpp"
+#include "projectX/utility/TypeTraits.hpp"
 
 namespace px {
 	template<typename... ModTypes>
 	class ModulesHolder {
 	public:
+
+		using ModulesHolder_t = std::tuple<ModTypes...>;
+
 		ModulesHolder() {
 			forEach(modulesHolder, [this](auto& mod) {
 				mod.depsParser.grantAccess(mod, modulesHolder);
@@ -15,20 +20,25 @@ namespace px {
 
 		template<typename Type, typename... TypeArgs>
 		auto init(TypeArgs... typeArgs) {
-			//@TODO: check if Type exists in modules and if has init func
-			return std::get<Type>(modulesHolder).init(typeArgs...);
+			return get<Type>().init(typeArgs...);
 		}
 
 		template<typename Type>
 		Type& get() {
-			//@TODO: check if Type exists in modules
+			static_assert(tt::tuple_contains_type<Type, ModulesHolder_t>(), "There is no such a type in Modules Holder");
+			return std::get<Type>(modulesHolder);
+		}
+
+		template<typename Type>
+		const Type& get() const {
+			static_assert(tt::tuple_contains_type<Type, ModulesHolder_t>(), "There is no such a type in Modules Holder");
 			return std::get<Type>(modulesHolder);
 		}
 
 
 	private:
 
-		std::tuple<ModTypes...> modulesHolder;
+		ModulesHolder_t modulesHolder;
 	};
 
 }
