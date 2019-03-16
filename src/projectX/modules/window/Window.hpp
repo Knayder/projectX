@@ -16,7 +16,12 @@ namespace px {
 
 		void display();
 
+		void draw(const sf::Drawable& drawable, const sf::RenderStates& states = sf::RenderStates::Default);
+
 		bool isOpen() const;
+
+
+		sf::Vector2u getWindowSize() const;
 
 
 	private:

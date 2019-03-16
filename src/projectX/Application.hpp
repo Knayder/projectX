@@ -5,6 +5,7 @@
 #include "projectX/utility/ModulesHolder.hpp"
 
 #include "projectX/modules/window/Window.hpp"
+#include "projectX/modules/renderer/Renderer.hpp"
 
 namespace px {
 
@@ -14,8 +15,12 @@ namespace px {
 
 		void init();
 
+		void display();
+
+		void update();
+
 	private:
-		ModulesHolder<Window> modulesHolder;
+		ModulesHolder<Window, Renderer> modulesHolder;
 	};
 
 }

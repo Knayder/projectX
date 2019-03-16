@@ -21,9 +21,17 @@ namespace px {
 		window.display();
 	}
 
+	void Window::draw(const sf::Drawable& drawable, const sf::RenderStates& states) {
+		window.draw(drawable, states);
+	}
+
 	bool Window::isOpen() const
 	{
 		return window.isOpen();
+	}
+
+	sf::Vector2u Window::getWindowSize() const {
+		return window.getSize();
 	}
 
 }
