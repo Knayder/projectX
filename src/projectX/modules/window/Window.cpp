@@ -30,6 +30,10 @@ namespace px {
 		return window.isOpen();
 	}
 
+	bool Window::pollEvent(sf::Event & event) {
+		return window.pollEvent(event);
+	}
+
 	sf::Vector2u Window::getWindowSize() const {
 		return window.getSize();
 	}

@@ -20,6 +20,8 @@ namespace px {
 
 		bool isOpen() const;
 
+		bool pollEvent(sf::Event& event);
+
 
 		sf::Vector2u getWindowSize() const;
 
