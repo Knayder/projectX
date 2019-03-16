@@ -15,9 +15,11 @@ namespace px {
 
 		void init();
 
+		void input(const sf::Event& event);
+
 		void display();
 
-		void update();
+		void update(float deltaTime);
 
 	private:
 		ModulesHolder<Window, Renderer> modulesHolder;

@@ -9,10 +9,20 @@ namespace px {
 		modulesHolder.init<Renderer>();
 		auto& window = modulesHolder.get<Window>();
 		auto& renderer = modulesHolder.get<Renderer>();
-		while (window.isOpen()) {
-			window.tempUpdate();
 
-			update();
+		sf::Clock clock;
+		float deltaTime = 1.f / 60.f;
+
+		while (window.isOpen()) {
+			deltaTime = clock.restart().asSeconds();
+
+			sf::Event event;
+			while (window.pollEvent(event)) {
+				window.input(event);
+				input(event);
+			}
+
+			update(deltaTime);
 
 			renderer.clear();
 
@@ -24,10 +34,15 @@ namespace px {
 		}
 
 	}
-	void Application::display() {
-
+	void Application::input(const sf::Event& event) {
+		//getModule<YourModule>().input(event);
 	}
-	void Application::update() {
 
+	void Application::display() {
+		//getModule<YourModule>().draw();
+	}
+
+	void Application::update(float deltaTime) {
+		//getModule<YourModule>().update(deltaTime);
 	}
 }

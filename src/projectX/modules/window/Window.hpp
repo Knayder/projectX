@@ -10,7 +10,7 @@ namespace px {
 		Window() {}
 		void init(unsigned int width, unsigned int height, const std::string& title);
 
-		void tempUpdate();
+		void input(const sf::Event& event);
 
 		void clear(sf::Color color = sf::Color::Black);
 
@@ -20,6 +20,7 @@ namespace px {
 
 		bool isOpen() const;
 
+		bool pollEvent(sf::Event& event);
 
 		sf::Vector2u getWindowSize() const;
 
