@@ -14,16 +14,16 @@ namespace px {
         }
     }
 
-    void Container::addWidget(size_t id, std::shared_ptr<Widget> widget) {
+    void Container::addWidget(size_t hash, std::unique_ptr<Widget> widget) {
         widget->setPosition(this->getPosition());
-        widgets.insert(std::pair<size_t, std::shared_ptr<Widget>>(id, widget));
+        widgets.insert(std::pair<size_t, std::unique_ptr<Widget>>(hash, std::move(widget)));
     }
 
-    std::shared_ptr<Widget> Container::getWidget(size_t id) const {
-        if( widgets.find(id) == widgets.end() )
+    Widget& Container::getWidget(size_t hash) const {
+        if( widgets.find(hash) == widgets.end() )
             throw std::length_error("Invalid widget id!");
 
-        return widgets.at(id);
+        return (*widgets.at(hash));
     }
 
     sf::Vector2f Container::getSize() const {
