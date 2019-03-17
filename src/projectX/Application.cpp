@@ -7,6 +7,7 @@ namespace px {
 	void Application::init() {
 		modulesHolder.init<Window>(1280u, 720u, "ProjectX");
 		modulesHolder.init<Renderer>();
+		modulesHolder.init<Gui>();
 		auto& window = modulesHolder.get<Window>();
 		auto& renderer = modulesHolder.get<Renderer>();
 
@@ -36,10 +37,12 @@ namespace px {
 	}
 	void Application::input(const sf::Event& event) {
 		//getModule<YourModule>().input(event);
+		modulesHolder.get<Gui>().input(event);
 	}
 
 	void Application::display() {
 		//getModule<YourModule>().draw();
+		modulesHolder.get<Gui>().draw();
 	}
 
 	void Application::update(float deltaTime) {

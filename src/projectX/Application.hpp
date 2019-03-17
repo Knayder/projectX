@@ -6,6 +6,7 @@
 
 #include "projectX/modules/window/Window.hpp"
 #include "projectX/modules/renderer/Renderer.hpp"
+#include "projectX/modules/gui/Gui.hpp"
 
 namespace px {
 
@@ -22,7 +23,7 @@ namespace px {
 		void update(float deltaTime);
 
 	private:
-		ModulesHolder<Window, Renderer> modulesHolder;
+		ModulesHolder<Window, Renderer, Gui> modulesHolder;
 	};
 
 }
