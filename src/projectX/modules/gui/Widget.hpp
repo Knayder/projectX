@@ -23,10 +23,10 @@ namespace px {
 
         void handleInput(const sf::Event& event);
 
-        void bindCallback(size_t event, std::function<void()> callback);
+        void bindCallback(size_t event, std::function<void(Widget*)> callback);
 
     protected:
-        std::map< size_t, std::function<void()> > callbacks;    
+        std::map< size_t, std::function<void(Widget*)> > callbacks;    
     
     private:
         virtual bool isMouseOver(sf::Vector2f mousePosition) { return false; }

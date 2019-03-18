@@ -6,7 +6,7 @@ namespace px {
 
     Widget::Widget(const Container& parent):parent(parent){
         for(size_t i=0; i<GuiEvent::COUNT; ++i)
-            callbacks.insert(std::pair<size_t, std::function<void()>>(i, [](){}) );
+            callbacks.insert(std::pair<size_t, std::function<void(Widget*)>>(i, [](Widget*){}) );
     }
 
     void Widget::addRelativeOffset(sf::Vector2f offset){
@@ -16,7 +16,7 @@ namespace px {
         this->move(offset);
     }
 
-    void Widget::bindCallback(size_t event, std::function<void()> callback) {
+    void Widget::bindCallback(size_t event, std::function<void(Widget*)> callback) {
         if( callbacks.find(event) == callbacks.end())
             throw std::length_error("Invalid event value!");
         callbacks.at(event) = callback;
@@ -28,11 +28,11 @@ namespace px {
         if(event.type == sf::Event::MouseMoved){
 
             if( isMouseOver( sf::Vector2f(event.mouseMove.x, event.mouseMove.y) ) ) {
-                callbacks.at(GuiEvent::ON_MOUSE_ENTER)();
+                callbacks.at(GuiEvent::ON_MOUSE_ENTER)(this);
                 mouseOver = true;
             }
             else {
-                callbacks.at(GuiEvent::ON_MOUSE_EXIT)();
+                callbacks.at(GuiEvent::ON_MOUSE_EXIT)(this);
                 mouseOver = false;
             }
 
@@ -43,13 +43,13 @@ namespace px {
 
                 switch(event.mouseButton.button){
                     case sf::Mouse::Left:
-                        callbacks.at(GuiEvent::LEFT_MB_PRESSED)();
+                        callbacks.at(GuiEvent::LEFT_MB_PRESSED)(this);
                     break;
                     case sf::Mouse::Right:
-                        callbacks.at(GuiEvent::RIGHT_MB_PRESSED)();
+                        callbacks.at(GuiEvent::RIGHT_MB_PRESSED)(this);
                     break;
                     case sf::Mouse::Middle:
-                        callbacks.at(GuiEvent::MIDDLE_MB_PRESSED)();
+                        callbacks.at(GuiEvent::MIDDLE_MB_PRESSED)(this);
                     break;
                 }
 

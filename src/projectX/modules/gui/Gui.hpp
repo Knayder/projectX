@@ -2,6 +2,8 @@
 
 #include "projectX/modules/renderer/Renderer.hpp"
 
+#include "Container.hpp"
+
 namespace px {
 
     class Gui :public Module<Renderer>
@@ -13,10 +15,10 @@ namespace px {
 
         void draw();
 
-        //TODO: Implement Gui::input method
-        void input(const sf::Event& event){}
+        void input(const sf::Event& event);
 
     private:
+        Container container;
         sf::RenderTexture* layer;
     };
 
