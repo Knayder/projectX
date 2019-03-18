@@ -14,10 +14,17 @@ namespace px {
     }
 
     bool Button::isMouseOver(sf::Vector2f mousePosition){
-        if(background.getTexture() != nullptr)
-            return background.getGlobalBounds().contains(mousePosition);
+        sf::FloatRect buttonRect;
 
-        return text.getGlobalBounds().contains(mousePosition);
+        if(background.getTexture() != nullptr)
+            buttonRect = background.getGlobalBounds();
+    
+        else buttonRect = text.getGlobalBounds();
+
+        buttonRect.top = this->getPosition().y;
+        buttonRect.left = this->getPosition().x;
+
+        return buttonRect.contains(mousePosition);
     }
 
 }
