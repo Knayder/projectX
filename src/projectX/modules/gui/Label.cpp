@@ -17,4 +17,13 @@ namespace px {
         this->setOrigin(newOrigin);
     }
 
+    bool Label::isMouseOver(sf::Vector2f mousePosition){
+        sf::FloatRect labelRect = text.getGlobalBounds();
+
+        labelRect.top = this->getPosition().y - text.getLocalBounds().height/2.0f;
+        labelRect.left = this->getPosition().x - text.getLocalBounds().width/2.0f;
+
+        return labelRect.contains(mousePosition);
+    }
+
 }

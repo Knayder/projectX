@@ -15,6 +15,8 @@ namespace px {
         void updateOrigin() override;
 
         sf::Text text;
+    private:
+        bool isMouseOver(sf::Vector2f mousePosition) override;
     };
 
 }
