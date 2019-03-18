@@ -27,6 +27,8 @@ namespace px {
 
         void bindCallback(size_t event, std::function<void(Widget*)> callback);
 
+        virtual void updateOrigin(){};
+
     protected:
         std::map< size_t, std::function<void(Widget*)> > callbacks;    
     

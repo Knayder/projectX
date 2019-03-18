@@ -7,11 +7,13 @@ namespace px {
     class Label :public Widget
     {
     public:
-        Label(){}
+        Label();
         virtual ~Label(){}
 
         void draw(sf::RenderTarget& target, sf::RenderStates states) const override;
         
+        void updateOrigin() override;
+
         sf::Text text;
     };
 
