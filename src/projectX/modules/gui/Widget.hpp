@@ -13,11 +13,13 @@ namespace px {
     class Widget :public sf::Drawable, public sf::Transformable
     {
     public:
-        Widget(const Container& parent);
+        Widget();
         virtual ~Widget(){}
         
         //range of relative offset coordiantes: 0-100 [%] of the parent container size
         void addRelativeOffset(sf::Vector2f offset);
+
+        void setParent(Container* parent);
 
         virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const=0;
 
@@ -31,7 +33,7 @@ namespace px {
     private:
         virtual bool isMouseOver(sf::Vector2f mousePosition) { return false; }
 
-        const Container& parent;
+        Container* parent;
     };
 
 }

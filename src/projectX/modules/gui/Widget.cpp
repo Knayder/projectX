@@ -4,15 +4,22 @@
 
 namespace px {
 
-    Widget::Widget(const Container& parent):parent(parent){
+    Widget::Widget(){
         for(size_t i=0; i<GuiEvent::COUNT; ++i)
             callbacks.insert(std::pair<size_t, std::function<void(Widget*)>>(i, [](Widget*){}) );
     }
 
+    void Widget::setParent(Container* parent){
+        this->parent = parent;
+    }
+
     void Widget::addRelativeOffset(sf::Vector2f offset){
+        if(parent == nullptr)
+            throw std::length_error("Trying to access widget parent which is nullptr! (use Container::getWidget)");
+        
         offset = offset/100.0f;
-        offset.x *= parent.getSize().x;
-        offset.y *= parent.getSize().y;
+        offset.x *= parent->getSize().x;
+        offset.y *= parent->getSize().y;
         this->move(offset);
     }
 

@@ -17,6 +17,7 @@ namespace px {
     void Container::addWidget(size_t hash, std::unique_ptr<Widget> widget) {
         widget->setPosition(this->getPosition());
         widgets.insert(std::pair<size_t, std::unique_ptr<Widget>>(hash, std::move(widget)));
+        widgets.at(hash)->setParent(this);
     }
 
     Widget& Container::getWidget(size_t hash) const {

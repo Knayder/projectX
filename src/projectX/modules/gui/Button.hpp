@@ -7,7 +7,7 @@ namespace px {
     class Button :public Label
     {
     public:
-        Button(const Container& parent):Label(parent) {}
+        Button(){}
         virtual ~Button(){}
         
         void setBackgroundImage(const sf::Texture& backgroundImage, sf::Vector2f offset=sf::Vector2f(5.0f, 5.0f));

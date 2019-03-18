@@ -7,7 +7,7 @@ namespace px {
     class Label :public Widget
     {
     public:
-        Label(const Container& parent):Widget(parent){}
+        Label(){}
         virtual ~Label(){}
 
         void draw(sf::RenderTarget& target, sf::RenderStates states) const override;
