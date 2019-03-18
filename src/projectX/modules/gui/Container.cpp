@@ -30,4 +30,10 @@ namespace px {
         return size;
     }
 
+    void Container::handleInput(const sf::Event& event) {
+        for(const auto& widget : widgets){
+            widget.second->handleInput(event);
+        }
+    }
+
 }

@@ -12,6 +12,7 @@ namespace px {
     }
 
     void Gui::input(const sf::Event& event){
+        this->container.handleInput(event);
     }
 
 }

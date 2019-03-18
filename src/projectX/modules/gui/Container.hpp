@@ -13,6 +13,8 @@ namespace px {
 
         void draw(sf::RenderTarget& target, sf::RenderStates states) const override;
 
+        void handleInput(const sf::Event& event);
+
         void addWidget(size_t hash, std::unique_ptr<Widget> widget);
 
         Widget& getWidget(size_t hash) const;
