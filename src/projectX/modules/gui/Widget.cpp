@@ -32,18 +32,6 @@ namespace px {
     void Widget::handleInput(const sf::Event& event){
         static bool mouseOver = false;
         
-        if( isMouseOver( sf::Vector2f(event.mouseMove.x, event.mouseMove.y) ) ) {
-            if( mouseOver == false )
-                callbacks.at(GuiEvent::ON_MOUSE_ENTER)(this);
-            mouseOver = true;
-        }
-
-        else {
-            if( mouseOver == true )
-                callbacks.at(GuiEvent::ON_MOUSE_EXIT)(this);
-            mouseOver = false;
-        }
-
         if(event.type == sf::Event::MouseButtonPressed){
             if(mouseOver){
 
@@ -60,6 +48,18 @@ namespace px {
                 }
 
             }
+        }
+        
+        if( isMouseOver( sf::Vector2f(event.mouseMove.x, event.mouseMove.y) ) ) {
+            if( mouseOver == false )
+                callbacks.at(GuiEvent::ON_MOUSE_ENTER)(this);
+            mouseOver = true;
+        }
+
+        else {
+            if( mouseOver == true )
+                callbacks.at(GuiEvent::ON_MOUSE_EXIT)(this);
+            mouseOver = false;
         }
 
     }
