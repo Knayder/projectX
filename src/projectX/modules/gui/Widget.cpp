@@ -53,7 +53,7 @@ namespace px {
         }
         
         if( isMouseOver( sf::Vector2f(float(event.mouseMove.x), float(event.mouseMove.y)) ) ) {
-            if( mouseOver == false )
+            if( mouseOver == false ) 
                 invokeEvent(GuiEvent::ON_MOUSE_ENTER);
             mouseOver = true;
         }

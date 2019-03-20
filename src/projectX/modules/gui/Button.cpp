@@ -21,8 +21,8 @@ namespace px {
     
         else buttonRect = text.getGlobalBounds();
 
-        buttonRect.top = this->getPosition().y - text.getLocalBounds().height/2.0f;
-        buttonRect.left = this->getPosition().x - text.getLocalBounds().width/2.0f;
+        buttonRect.top = this->getPosition().y - text.getLocalBounds().height * 0.5f;
+        buttonRect.left = this->getPosition().x - text.getLocalBounds().width * 0.5f;
 
         return buttonRect.contains(mousePosition);
     }
