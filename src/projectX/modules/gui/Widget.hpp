@@ -2,7 +2,7 @@
 
 #include <SFML/Graphics.hpp>
 #include <functional>
-#include <map>
+#include <array>
 
 #include "GuiEvents.hpp"
 
@@ -12,6 +12,8 @@ namespace px {
 
     class Widget :public sf::Drawable, public sf::Transformable
     {
+	protected:
+		using Callback_t = std::function<void(Widget*)>;
     public:
         Widget();
         virtual ~Widget(){}
@@ -21,16 +23,17 @@ namespace px {
 
         void setParent(Container* parent);
 
-        virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const=0;
+        virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const = 0;
 
         void handleInput(const sf::Event& event);
 
-        void bindCallback(size_t event, std::function<void(Widget*)> callback);
+        void bindCallback(GuiEvent event, Callback_t callback);
 
         virtual void updateOrigin(){};
 
     protected:
-        std::map< size_t, std::function<void(Widget*)> > callbacks;    
+        std::array<Callback_t, GuiEvent::COUNT> callbacks;
+		void invokeEvent(GuiEvent eventKey);
     
     private:
         virtual bool isMouseOver(sf::Vector2f mousePosition) { return false; }

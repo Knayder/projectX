@@ -1,7 +1,7 @@
 #pragma once
 
 namespace px {
-    enum GuiEvent
+    enum GuiEvent : size_t
     {
         LEFT_MB_PRESSED = 0,
         RIGHT_MB_PRESSED,

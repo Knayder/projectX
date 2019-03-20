@@ -5,8 +5,10 @@
 namespace px {
 
     Widget::Widget(){
-        for(size_t i=0; i<GuiEvent::COUNT; ++i)
-            callbacks.insert(std::pair<size_t, std::function<void(Widget*)>>(i, [](Widget*){}) );
+		for (auto& callback : callbacks)
+		{
+			callback = [](Widget*) {};
+		}
     }
 
     void Widget::setParent(Container* parent){
@@ -23,44 +25,51 @@ namespace px {
         this->move(offset);
     }
 
-    void Widget::bindCallback(size_t event, std::function<void(Widget*)> callback) {
-        if( callbacks.find(event) == callbacks.end())
-            throw std::length_error("Invalid event value!");
-        callbacks.at(event) = callback;
+    void Widget::bindCallback(GuiEvent eventKey, Callback_t callback) {
+		if (eventKey >= GuiEvent::COUNT)
+			throw std::length_error("Trying to bind incorrect GuiEvent!");
+        callbacks[eventKey] = callback;
     }
 
     void Widget::handleInput(const sf::Event& event){
-        static bool mouseOver = false;
+        static bool mouseOver = false; //Troche nie wiem, co maiales na mysli z tym statickiem, zamaiast zrobic member, pls popraw ;P
         
         if(event.type == sf::Event::MouseButtonPressed){
             if(mouseOver){
 
                 switch(event.mouseButton.button){
                     case sf::Mouse::Left:
-                        callbacks.at(GuiEvent::LEFT_MB_PRESSED)(this);
+                        invokeEvent(GuiEvent::LEFT_MB_PRESSED);
                     break;
                     case sf::Mouse::Right:
-                        callbacks.at(GuiEvent::RIGHT_MB_PRESSED)(this);
+                        invokeEvent(GuiEvent::RIGHT_MB_PRESSED);
                     break;
                     case sf::Mouse::Middle:
-                        callbacks.at(GuiEvent::MIDDLE_MB_PRESSED)(this);
+                        invokeEvent(GuiEvent::MIDDLE_MB_PRESSED);
                     break;
                 }
 
             }
         }
         
-        if( isMouseOver( sf::Vector2f(event.mouseMove.x, event.mouseMove.y) ) ) {
+        if( isMouseOver( sf::Vector2f(float(event.mouseMove.x), float(event.mouseMove.y)) ) ) {
             if( mouseOver == false )
-                callbacks.at(GuiEvent::ON_MOUSE_ENTER)(this);
+                invokeEvent(GuiEvent::ON_MOUSE_ENTER);
             mouseOver = true;
         }
 
         else {
             if( mouseOver == true )
-                callbacks.at(GuiEvent::ON_MOUSE_EXIT)(this);
+				invokeEvent(GuiEvent::ON_MOUSE_EXIT);
             mouseOver = false;
         }
 
     }
+	void Widget::invokeEvent(GuiEvent eventKey)
+	{
+		if (eventKey >= GuiEvent::COUNT)
+			throw std::length_error("Trying to invoke incorrect GuiEvent!");
+
+		callbacks[eventKey](this);
+	}
 }
