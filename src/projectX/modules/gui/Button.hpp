@@ -10,9 +10,10 @@ namespace px {
         Button(){}
         virtual ~Button(){}
         
-        void setBackgroundImage(const sf::Texture& backgroundImage, 
-                                sf::Vector2f offset=sf::Vector2f(0.0f, 0.0f), 
-                                sf::Vector2f scale=sf::Vector2f(1.0f, 1.0f));
+        void setBackgroundImage(const sf::Texture& backgroundImage);
+
+        //TODO: implement setBackgroundPadding method
+        void setBackgroundPadding(sf::Vector2f padding);
 
         void draw(sf::RenderTarget& target, sf::RenderStates states) const;
 
@@ -20,6 +21,9 @@ namespace px {
 
     private:
         bool isMouseOver(sf::Vector2f mousePosition) override;
+
+        void setUpBackgroundScale();
+
         sf::Sprite background;
     };
 

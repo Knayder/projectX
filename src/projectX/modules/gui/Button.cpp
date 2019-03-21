@@ -2,11 +2,10 @@
 
 namespace px {
 
-    void Button::setBackgroundImage(const sf::Texture& backgroundImage, sf::Vector2f offset, sf::Vector2f scale){
+    void Button::setBackgroundImage(const sf::Texture& backgroundImage){
         background.setTexture(backgroundImage);
-        background.setScale(scale);
         background.setPosition(this->getPosition());
-        background.move(-offset);
+        setUpBackgroundScale();
     }
 
     void Button::draw(sf::RenderTarget& target, sf::RenderStates states) const{
@@ -26,6 +25,20 @@ namespace px {
         buttonRect.left = this->getPosition().x - text.getLocalBounds().width * 0.5f;
 
         return buttonRect.contains(mousePosition);
+    }
+
+
+    void Button::setUpBackgroundScale(){
+        sf::Vector2f scale;
+        
+        //TODO: remove hardcoded padding
+        scale.x = text.getLocalBounds().width / static_cast<float>(background.getTextureRect().width) + 0.1f;
+        scale.y = text.getLocalBounds().height / static_cast<float>(background.getTextureRect().height) + 0.2f;
+
+        background.setScale(scale);
+    }
+
+    void Button::setBackgroundPadding(sf::Vector2f padding){
     }
 
 }
