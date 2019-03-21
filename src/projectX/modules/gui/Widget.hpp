@@ -18,7 +18,6 @@ namespace px {
         Widget();
         virtual ~Widget(){}
         
-        //range of relative offset coordiantes: 0-100 [%] of the parent container size
         void addRelativeOffset(sf::Vector2f offset);
 
         void setParent(Container* parent);
