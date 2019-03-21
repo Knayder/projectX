@@ -38,6 +38,7 @@ namespace px {
     private:
         virtual bool isMouseOver(sf::Vector2f mousePosition) { return false; }
 
+        bool mouseOver;
         Container* parent;
     };
 

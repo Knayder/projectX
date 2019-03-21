@@ -4,7 +4,8 @@
 
 namespace px {
 
-    Widget::Widget(){
+    Widget::Widget()
+    :mouseOver(false){
 		for (auto& callback : callbacks)
 		{
 			callback = [](Widget*) {};
@@ -32,8 +33,7 @@ namespace px {
     }
 
     void Widget::handleInput(const sf::Event& event){
-        static bool mouseOver = false; //Troche nie wiem, co maiales na mysli z tym statickiem, zamaiast zrobic member, pls popraw ;P
-        
+
         if(event.type == sf::Event::MouseButtonPressed){
             if(mouseOver){
 
