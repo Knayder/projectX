@@ -28,8 +28,6 @@ namespace px {
 
         void bindCallback(GuiEvent event, Callback_t callback);
 
-        virtual void updateOrigin(){};
-
     protected:
         std::array<Callback_t, GuiEvent::COUNT> callbacks;
 		void invokeEvent(GuiEvent eventKey);
