@@ -2,15 +2,16 @@
 
 namespace px {
 
-    void Button::setBackgroundImage(const sf::Texture& backgroundImage, sf::Vector2f offset){
+    void Button::setBackgroundImage(const sf::Texture& backgroundImage, sf::Vector2f offset, sf::Vector2f scale){
         background.setTexture(backgroundImage);
+        background.setScale(scale);
         background.setPosition(this->getPosition());
         background.move(-offset);
     }
 
     void Button::draw(sf::RenderTarget& target, sf::RenderStates states) const{
+        target.draw(background, this->getTransform());
         target.draw(this->text, this->getTransform());
-        target.draw(background);
     }
 
     bool Button::isMouseOver(sf::Vector2f mousePosition){
