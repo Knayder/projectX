@@ -1,3 +1,11 @@
+# windows build
 /x64
 *.vcxproj
 *.vcxproj.*
+/.vscode/
+Debug/*
+
+# linux build
+/build/
+/cmake/
+CMakeLists.txt
