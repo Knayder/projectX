@@ -7,6 +7,7 @@ namespace px {
 	void Application::init() {
 		modulesHolder.init<Window>(1280u, 720u, "ProjectX");
 		modulesHolder.init<Renderer>();
+		modulesHolder.init<World>();
 		auto& window = modulesHolder.get<Window>();
 		auto& renderer = modulesHolder.get<Renderer>();
 
@@ -35,14 +36,17 @@ namespace px {
 
 	}
 	void Application::input(const sf::Event& event) {
-		//getModule<YourModule>().input(event);
+		//modulesHolder.get<module>().input(event);
+		modulesHolder.get<World>().input(event);
 	}
 
 	void Application::display() {
-		//getModule<YourModule>().draw();
+		//modulesHolder.get<module>().draw();
+		modulesHolder.get<World>().draw();
 	}
 
 	void Application::update(float deltaTime) {
-		//getModule<YourModule>().update(deltaTime);
+		//modulesHolder.get<module>().update(deltaTime);
+		modulesHolder.get<World>().update(deltaTime);
 	}
 }
