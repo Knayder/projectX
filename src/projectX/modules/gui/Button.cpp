@@ -29,16 +29,22 @@ namespace px {
 
 
     void Button::setUpBackgroundScale(){
-        sf::Vector2f scale;
-        
-        //TODO: remove hardcoded padding
-        scale.x = text.getLocalBounds().width / static_cast<float>(background.getTextureRect().width) + 0.1f;
-        scale.y = text.getLocalBounds().height / static_cast<float>(background.getTextureRect().height) + 0.2f;
-
-        background.setScale(scale);
+        this->resizeBackground(sf::Vector2f(text.getLocalBounds().width, text.getLocalBounds().height));
     }
 
     void Button::setBackgroundPadding(sf::Vector2f padding){
+        sf::Vector2f newSize;
+
+        newSize.x = text.getLocalBounds().width + (2.0f * padding.x);
+        newSize.y = text.getLocalBounds().height + (2.0f * padding.y);
+        this->resizeBackground(newSize);
+
+        background.move(-padding/2.0f);
+    } 
+
+    void Button::resizeBackground(sf::Vector2f size){
+        background.setScale(size.x / background.getLocalBounds().width, 
+                            size.y / background.getLocalBounds().height);
     }
 
 }

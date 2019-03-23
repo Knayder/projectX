@@ -12,7 +12,6 @@ namespace px {
         
         void setBackgroundImage(const sf::Texture& backgroundImage);
 
-        //TODO: implement setBackgroundPadding method
         void setBackgroundPadding(sf::Vector2f padding);
 
         void draw(sf::RenderTarget& target, sf::RenderStates states) const;
@@ -22,6 +21,8 @@ namespace px {
     private:
         bool isMouseOver(sf::Vector2f mousePosition) override;
 
+        void resizeBackground(sf::Vector2f size);
+        
         void setUpBackgroundScale();
 
         sf::Sprite background;
