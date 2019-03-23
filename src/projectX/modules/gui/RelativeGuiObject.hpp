@@ -17,7 +17,7 @@ namespace px {
         void addRelativeOffset(sf::Vector2f offset);
 
         void setRelativePosition(sf::Vector2f position);
-    private:
+    protected:
         Container* parent;
     };
 
