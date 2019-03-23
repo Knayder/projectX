@@ -23,6 +23,7 @@ namespace px {
 
         sf::Vector2f getSize() const;
 
+        void setRelativeSize(sf::Vector2f size);
     private:
         sf::Vector2f size;
         std::map<size_t, std::unique_ptr<Widget>> widgets;

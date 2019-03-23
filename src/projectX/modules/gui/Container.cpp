@@ -37,4 +37,14 @@ namespace px {
         }
     }
 
+    void Container::setRelativeSize(sf::Vector2f size){
+        if(parent == nullptr)
+            throw std::runtime_error("Trying to access container parent which is nullptr!");
+
+        size.x *= parent->getSize().x;
+        size.y *= parent->getSize().y;
+
+        this->size = size;
+    }
+
 }
