@@ -4,9 +4,11 @@
 #include <memory>
 #include <map>
 
+#include "RelativeGuiObject.hpp"
+
 namespace px {
 
-    class Container :public sf::Drawable, public sf::Transformable
+    class Container :public sf::Drawable, public RelativeGuiObject
     {
     public:
         Container(sf::Vector2f size=sf::Vector2f(0.0f, 0.0f), sf::Vector2f position=sf::Vector2f(0.0f, 0.0f));

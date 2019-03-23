@@ -5,22 +5,19 @@
 #include <array>
 
 #include "GuiEvents.hpp"
+#include "RelativeGuiObject.hpp"
 
 namespace px {
     
     class Container;
 
-    class Widget :public sf::Drawable, public sf::Transformable
+    class Widget :public sf::Drawable, public RelativeGuiObject
     {
 	protected:
 		using Callback_t = std::function<void(Widget*)>;
     public:
         Widget();
         virtual ~Widget(){}
-        
-        void addRelativeOffset(sf::Vector2f offset);
-
-        void setParent(Container* parent);
 
         virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const = 0;
 
@@ -36,7 +33,6 @@ namespace px {
         virtual bool isMouseOver(sf::Vector2f mousePosition) { return false; }
 
         bool mouseOver;
-        Container* parent;
     };
 
 }

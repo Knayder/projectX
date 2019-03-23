@@ -12,19 +12,6 @@ namespace px {
 		}
     }
 
-    void Widget::setParent(Container* parent){
-        this->parent = parent;
-    }
-
-    void Widget::addRelativeOffset(sf::Vector2f offset){
-        if(parent == nullptr)
-            throw std::length_error("Trying to access widget parent which is nullptr! (use Container::getWidget)");
-        
-        offset.x *= parent->getSize().x;
-        offset.y *= parent->getSize().y;
-        this->move(offset);
-    }
-
     void Widget::bindCallback(GuiEvent eventKey, Callback_t callback) {
 		if (eventKey >= GuiEvent::COUNT)
 			throw std::length_error("Trying to bind incorrect GuiEvent!");
