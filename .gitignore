@@ -3,6 +3,7 @@
 *.vcxproj
 *.vcxproj.*
 /.vscode/
+Debug/*
 
 # linux build
 /build/
