@@ -7,7 +7,7 @@
 
 #include <SFML/System/NonCopyable.hpp>
 
-#include "ResourceLoader.h"
+#include "ResourceLoader.hpp"
 
 namespace px {
 	template <typename Res>
