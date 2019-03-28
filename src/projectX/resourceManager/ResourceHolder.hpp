@@ -67,7 +67,7 @@ namespace px {
 		{
 			if (const auto it = resources.find(name); it != resources.end())
 			{
-				return *it;
+				return it->second;
 			}
 			else
 			{
