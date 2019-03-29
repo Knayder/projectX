@@ -1,5 +1,5 @@
 #include "Widget.hpp"
-#include "Container.hpp"
+#include "GuiContainer.hpp"
 #include <exception>
 
 namespace px {

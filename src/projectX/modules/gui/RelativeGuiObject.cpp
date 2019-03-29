@@ -1,10 +1,10 @@
 #include "RelativeGuiObject.hpp"
-#include "Container.hpp"
+#include "GuiContainer.hpp"
 
 #include <exception>
 
 namespace px {
-    void RelativeGuiObject::setParent(Container* parent){
+    void RelativeGuiObject::setParent(GuiContainer* parent){
         this->parent = parent;
     }
 

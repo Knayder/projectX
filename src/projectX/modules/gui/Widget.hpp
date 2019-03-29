@@ -9,7 +9,7 @@
 
 namespace px {
     
-    class Container;
+    class GuiContainer;
 
     class Widget :public sf::Drawable, public RelativeGuiObject
     {

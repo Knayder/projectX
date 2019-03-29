@@ -4,7 +4,7 @@ namespace px {
 
     void Gui::init(){
         this->layer = &getModule<Renderer>().getLayer(Renderer::Layer::GUI);
-        container = Container( sf::Vector2f( this->layer->getSize() ) );
+        container = GuiContainer( sf::Vector2f( this->layer->getSize() ) );
     }
 
     void Gui::draw(){

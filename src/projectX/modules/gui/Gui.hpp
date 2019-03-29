@@ -2,7 +2,7 @@
 
 #include "projectX/modules/renderer/Renderer.hpp"
 
-#include "Container.hpp"
+#include "GuiContainer.hpp"
 
 namespace px {
 
@@ -18,7 +18,7 @@ namespace px {
         void input(const sf::Event& event);
 
     private:
-        Container container;
+        GuiContainer container;
         sf::RenderTexture* layer;
     };
 

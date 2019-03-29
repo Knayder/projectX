@@ -4,7 +4,7 @@
 
 namespace px {
 
-    class Container;
+    class GuiContainer;
 
     class RelativeGuiObject : public sf::Transformable
     {
@@ -12,13 +12,13 @@ namespace px {
         RelativeGuiObject():parent(nullptr){}
         virtual ~RelativeGuiObject(){}
 
-        void setParent(Container* parent);
+        void setParent(GuiContainer* parent);
 
         void addRelativeOffset(sf::Vector2f offset);
 
         void setRelativePosition(sf::Vector2f position);
     protected:
-        Container* parent;
+        GuiContainer* parent;
     };
 
 }
