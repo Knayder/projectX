@@ -7,7 +7,7 @@
 
 #include <SFML/System/NonCopyable.hpp>
 
-#include "ResourceLoader.h"
+#include "ResourceLoader.hpp"
 
 namespace px {
 	template <typename Res>
@@ -67,7 +67,7 @@ namespace px {
 		{
 			if (const auto it = resources.find(name); it != resources.end())
 			{
-				return *it;
+				return it->second;
 			}
 			else
 			{
