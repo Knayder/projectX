@@ -75,4 +75,8 @@ namespace px {
 			return std::get<ResourceHolder<Res>>(holders);
 		}
 	};
+
+	using Texture_t = ResourceManager::Resource_t<sf::Texture>;
+	using Font_t = ResourceManager::Resource_t<sf::Font>;
+	using SoundBuffer_t = ResourceManager::Resource_t<sf::SoundBuffer>;
 }
