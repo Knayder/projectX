@@ -1,24 +1,26 @@
 #include "World.hpp"
-#include "components/Test.hpp"
+#include "components/Sprite.hpp"
+#include "components/PlayerController.hpp"
 
 
 namespace px {
 	void World::init() {
 		renderTexture = &getModule<Renderer>().getLayer(Renderer::Layer::Game);
-		auto& obj = scene.addObject();
-		obj.addComponent<Test>();
-		obj.move({ 100.f, 100.f });
+		auto& obj = scenesManager.addScene("test").addObject();
+		obj.addComponent<Components::Sprite>();
+		obj.addComponent<Components::PlayerController>();
+
 	}
 
 	void World::update(float deltaTime) {
-		scene.update(deltaTime);
+		scenesManager.update(deltaTime);
 	}
 
 	void World::draw() {
-		renderTexture->draw(scene);
+		renderTexture->draw(scenesManager);
 	}
 
 	void World::input(const sf::Event & event) {
-		scene.input(event);
+		scenesManager.input(event);
 	}
 }

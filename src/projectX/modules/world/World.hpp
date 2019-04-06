@@ -5,7 +5,7 @@
 #include "projectX/utility/Module.hpp"
 #include "projectX/modules/renderer/Renderer.hpp"
 
-#include "Scene.hpp"
+#include "ScenesManager.hpp"
 
 namespace px {
 	class World : public Module<Renderer> {
@@ -19,6 +19,6 @@ namespace px {
 		void input(const sf::Event& event);
 	private:
 		sf::RenderTexture* renderTexture{ nullptr };
-		Scene scene;
+		ScenesManager scenesManager;
 	};
 }

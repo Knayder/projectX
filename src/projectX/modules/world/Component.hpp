@@ -11,7 +11,8 @@ namespace px {
 		virtual ~Component();
 
 		void setParent(Object* parent);
-		Object* getParent() const;
+		Object* getParent();
+		const Object* getParent() const;
 
 		virtual void update(float deltaTime) {}
 

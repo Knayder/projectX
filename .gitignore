@@ -9,3 +9,5 @@ Debug/*
 /build/
 /cmake/
 CMakeLists.txt
+
+assets/*

@@ -12,7 +12,10 @@ namespace px {
 	void Component::setParent(Object * parent) {
 		this->parent = parent;
 	}
-	Object * Component::getParent() const {
+	const Object * Component::getParent() const {
+		return parent;
+	}
+	Object * Component::getParent() {
 		return parent;
 	}
 }

@@ -32,6 +32,14 @@ namespace px {
 			components.emplace_back(new T(args...))->setParent(this);
 		}
 
+		template<typename T>
+		T& getComponent() {
+			for (auto& component : components)
+				if (T* gettedComponent = dynamic_cast<T*>(component.get()))
+					return *gettedComponent;
+			throw std::out_of_range("There is no such a component in a object");
+		}
+
 		void setParent(Scene* parent);
 		Scene* getParent() const;
 	private:
