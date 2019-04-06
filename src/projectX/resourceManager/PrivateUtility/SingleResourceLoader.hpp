@@ -6,7 +6,7 @@
 
 namespace px {
 	template <typename Res>
-	struct ResourceLoader
+	struct SingleResourceLoader
 	{
 		using Resource_t = std::shared_ptr<const Res>;
 
