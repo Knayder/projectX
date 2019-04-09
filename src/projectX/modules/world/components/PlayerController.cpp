@@ -2,23 +2,14 @@
 #include <iostream>
 
 namespace px::Components {
-	PlayerController::PlayerController() {
+	PlayerController::PlayerController() 
+	{
 
 	}
 
 
 	void PlayerController::update(float deltaTime) {
-		/*sf::Vector2f delta = (direction * vMax) - velocity;
-		float c = std::sqrt(delta.x*delta.x + delta.y*delta.y);
-		//std::cout << direction.x << std::endl;;
-		if(c != 0.f)
-			velocity += deltaTime * (delta / (c*0.05f));*/
-		float c = std::sqrt(direction.x*direction.x + direction.y*direction.y);
-		if (c != 0.f)
-			direction /= c;
-
-
-		getParent()->move(direction*deltaTime*vMax);
+		getComponent<RigidBody>().applyForce(direction*deltaTime*vMax);
 	}
 
 

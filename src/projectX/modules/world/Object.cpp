@@ -8,19 +8,16 @@ namespace px {
 	}
 
 	void Object::update(float deltaTime) {
-		for (auto& component : components)
-			component->update(deltaTime);
+		componentsManager.update(deltaTime);
 	}
 
 	void Object::draw(sf::RenderTarget & target, sf::RenderStates states) const {
 		states.transform *= getTransform();
-		for (auto& component : components)
-			target.draw(*component, states);
+		target.draw(componentsManager, states);
 	}
 
 	void Object::input(const sf::Event & event) {
-		for (auto& component : components)
-			component->input(event);
+		componentsManager.input(event);
 	}
 
 	void Object::setParent(Scene * parent) {

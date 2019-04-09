@@ -1,6 +1,7 @@
 #include "World.hpp"
 #include "components/Sprite.hpp"
 #include "components/PlayerController.hpp"
+#include "components/RigidBody.hpp"
 
 
 namespace px {

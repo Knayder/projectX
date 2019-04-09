@@ -4,9 +4,10 @@
 #include <memory>
 #include <type_traits>
 
+
 #include <SFML/Graphics.hpp>
 
-#include "Component.hpp"
+#include "ComponentsManager.hpp"
 
 namespace px {
 
@@ -14,8 +15,6 @@ namespace px {
 
 	class Object : public sf::Transformable, public sf::Drawable {
 	public:
-		using Components_t = std::vector<std::unique_ptr<Component>>;
-
 		Object() = delete;
 
 		Object(Scene* parent);
@@ -27,23 +26,19 @@ namespace px {
 		void input(const sf::Event& event);
 
 		template<typename T, typename... Args>
-		void addComponent(Args... args)	{
-			static_assert(std::is_base_of_v<Component, T>, "Given type is not a component");
-			components.emplace_back(new T(args...))->setParent(this);
+		T& addComponent(Args... args)	{
+			return componentsManager.addComponent<T, Args...>(args...);
 		}
 
 		template<typename T>
 		T& getComponent() {
-			for (auto& component : components)
-				if (T* gettedComponent = dynamic_cast<T*>(component.get()))
-					return *gettedComponent;
-			throw std::out_of_range("There is no such a component in a object");
+			return componentsManager.getComponent<T>();
 		}
 
 		void setParent(Scene* parent);
 		Scene* getParent() const;
 	private:
-		Components_t components;
+		ComponentsManager componentsManager{ this };
 		Scene* parent{ nullptr };
 	};
 }

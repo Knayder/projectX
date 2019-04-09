@@ -5,7 +5,7 @@
 #include <iostream>
 
 namespace px::Components {
-	class Sprite : public Component {
+	class Sprite : public ComponentBase<> {
 	public:
 		Sprite();
 

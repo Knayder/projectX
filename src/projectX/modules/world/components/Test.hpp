@@ -3,7 +3,7 @@
 #include "../Component.hpp"
 #include <iostream>
 namespace px {
-	class Test : public Component {
+	class Test : public ComponentBase<> {
 	public:
 		float r = 100.f;
 		virtual void update(float deltaTime) {
