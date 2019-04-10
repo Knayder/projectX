@@ -1,9 +1,10 @@
 #pragma once
 
 #include "projectX/modules/world/Component.hpp"
+#include "Collider.hpp"
 
 namespace px::Components {
-	class RigidBody : public ComponentBase<> {
+	class RigidBody : public ComponentBase<Collider> {
 	public:
 		RigidBody();
 

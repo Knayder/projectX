@@ -3,10 +3,10 @@
 #include <SFML/Graphics.hpp>
 
 #include "projectX/utility/TypeTraits.hpp"
-#include "Object.hpp"
 
 
 namespace px {
+	class Object;
 	class Component : public sf::Drawable {
 	public:
 		Component();
@@ -30,17 +30,16 @@ namespace px {
 	template<typename... Deps>
 	class ComponentBase : public Component {
 	public:
-		struct {
-			std::tuple<Deps*...> deps;
-			void operator()(Object* object) {
-				((std::get<Deps*>(deps) = &(object->addComponent<Deps>())), ...);
-			}
-		} grantAccess;
+		std::tuple<Deps*...> dependencies;
+
+		void grantAccess(Deps&... deps) {
+			((std::get<Deps*>(dependencies) = &deps), ...);
+		}
 
 		template<typename T>
 		T& getComponent() {
 			static_assert(tt::tuple_contains_type<T, std::tuple<Deps...>>(), "Given component is not dependecy");
-			return *std::get<T*>(grantAccess.deps);
+			return *std::get<T*>(dependencies);
 		}
 	};
 }

@@ -3,6 +3,8 @@
 #include "Object.hpp"
 #include "Component.hpp"
 
+#include "projectX/utility/TupleForEach.hpp"
+
 namespace px {
 	ComponentsManager::ComponentsManager(Object* owner) :
 		owner{ owner } {

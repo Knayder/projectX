@@ -3,10 +3,17 @@
 #include <SFML/Graphics.hpp>
 #include <vector>
 #include <memory>
+#include <tuple>
+
+#include "projectX/utility/TypeTraits.hpp"
+
+#include "Component.hpp"
+#include "ComponentsTracker.hpp"
 
 namespace px {
+
 	class Object;
-	class Component;
+
 	class ComponentsManager : public sf::Drawable {
 	public:
 		using Components_t = std::vector<Component*>;
@@ -21,6 +28,11 @@ namespace px {
 
 		virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const override;
 
+		template<typename... Deps>
+		void grantAccessToComponent(ComponentBase<Deps...>* component) {
+			component->grantAccess(addComponent<Deps>()...);
+		}
+
 		template<typename T, typename... Args>
 		T& addComponent(Args... args) {
 			static_assert(std::is_base_of_v<Component, T>, "Given type is not a component");
@@ -28,8 +40,9 @@ namespace px {
 				return *found;
 			T* component = new T(args...);
 			component->setParent(owner);
-			component->grantAccess(owner);
+			grantAccessToComponent(component);
 			components.push_back(component);
+			ComponentsTracker_t::checkIfTracked(component);
 			return *component;
 		}
 
@@ -49,8 +62,11 @@ namespace px {
 			return nullptr;
 		}
 
+
+
+	private:
 		Components_t components;
 		Object* owner;
-	private:
+
 	};
 }

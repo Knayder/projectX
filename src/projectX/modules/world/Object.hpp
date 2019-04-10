@@ -8,7 +8,7 @@
 #include <SFML/Graphics.hpp>
 
 #include "ComponentsManager.hpp"
-
+#include "components/Collider.hpp"
 namespace px {
 
 	class Scene;
