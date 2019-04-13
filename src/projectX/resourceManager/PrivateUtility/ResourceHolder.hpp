@@ -32,8 +32,7 @@ namespace px {
 			:
 			folderName("Resources/" + folder + "/"),
 			extention("." + extention),
-			isExtentionSet{ true },
-			ResourceHolder()
+			isExtentionSet{ true }
 		{
 		}
 

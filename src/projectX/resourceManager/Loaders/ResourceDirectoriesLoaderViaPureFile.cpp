@@ -10,7 +10,7 @@ namespace px {
 		if (in.bad())
 		{
 			std::string errMsg = "ResourceDirectoriesLoaderViaPureFile could not open " + fileName + ".";
-			throw std::exception(errMsg.c_str());
+			throw std::runtime_error(errMsg.c_str());
 		}
 		in >> folderName;
 	}
