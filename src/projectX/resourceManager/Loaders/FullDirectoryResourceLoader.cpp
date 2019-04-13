@@ -1,6 +1,13 @@
 #include "FullDirectoryResourceLoader.hpp"
 
+#ifdef __GNUG__
+#include <experimental/filesystem>
+namespace fs = std::experimental::filesystem;
+#else
 #include <filesystem>
+namespace fs = std::filesystem;
+#endif
+
 #include <algorithm>
 
 
@@ -14,8 +21,6 @@ namespace px {
 
 	void FullDirectoryResourceLoader::loadFromDirectory(const std::string & directoryPath)
 	{
-		namespace fs = std::filesystem;
-
 		for (const auto& subDirectory : fs::recursive_directory_iterator(directoryPath))
 		{
 			auto path = subDirectory.path().string();
