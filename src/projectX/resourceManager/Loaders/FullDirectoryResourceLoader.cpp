@@ -1,7 +1,7 @@
 #include "FullDirectoryResourceLoader.hpp"
 
 #include <filesystem>
-#include<algorithm>
+#include <algorithm>
 
 
 namespace px {
@@ -32,7 +32,7 @@ namespace px {
 	}
 
 
-	FullDirectoryResourceLoader::ResType FullDirectoryResourceLoader::getTypeByPath(const std::string & path) const
+	ResType FullDirectoryResourceLoader::getTypeByPath(const std::string & path) const
 	{
 		const auto extension = getExtension(path);
 		if (extension == "jpg" || extension == "png" || extension == "bmp")
@@ -54,16 +54,16 @@ namespace px {
 		auto resType = getTypeByPath(path);
 		switch (resType)
 		{
-		case px::FullDirectoryResourceLoader::Texture:
+		case ResType::Texture:
 			manager.load<sf::Texture>(path);
 			break;
-		case px::FullDirectoryResourceLoader::Font:
+		case ResType::Font:
 			manager.load<sf::Font>(path);
 			break;
-		case px::FullDirectoryResourceLoader::SoundBuffer:
+		case ResType::SoundBuffer:
 			manager.load<sf::SoundBuffer>(path);
 			break;
-		case px::FullDirectoryResourceLoader::NotSupportedType:
+		case ResType::NotSupportedType:
 			break;
 		default:
 			break;
