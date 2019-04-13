@@ -5,9 +5,9 @@
 
 namespace px::Components {
 	Sprite::Sprite() {
-		sprite.setTexture(
-			*ResourceManager::instance().acquire<sf::Texture>("assets/test.png")
-		);
+		auto& resMan = ResourceManager::instance();
+		texture = resMan.acquire<sf::Texture>("assets/test.png");
+		sprite.setTexture(*texture);
 	}
 
 	void Sprite::draw(sf::RenderTarget & target, sf::RenderStates states) const {
