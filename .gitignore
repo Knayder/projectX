@@ -9,3 +9,6 @@ Debug/*
 /build/
 /cmake/
 CMakeLists.txt
+
+#Tested Textures
+/Textures/
