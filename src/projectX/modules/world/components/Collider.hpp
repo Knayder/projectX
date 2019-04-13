@@ -3,7 +3,8 @@
 #include "../Component.hpp"
 
 namespace px::Components {
-	class Collider : public ComponentBase<> {
+	class RigidBody;
+	class Collider : public ComponentBase<RigidBody> {
 	public:
 		Collider();
 
@@ -11,6 +12,8 @@ namespace px::Components {
 
 		void setSize(const sf::Vector2f& size);
 		void setOffset(const sf::Vector2f& offset);
+
+		bool contains(const Collider& collider) const;
 
 		const sf::Vector2f& getSize() const;
 		const sf::Vector2f& getOffset() const;

@@ -7,6 +7,14 @@ namespace px {
 
 	}
 
+	Object::Object(Object && object):
+		parent{std::move(object.parent)},
+		componentsManager{std::move(object.componentsManager)}
+	{
+		componentsManager.setOwner(this);
+		setPosition(object.getPosition());
+	}
+
 	void Object::update(float deltaTime) {
 		componentsManager.update(deltaTime);
 	}

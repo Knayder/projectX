@@ -4,11 +4,18 @@
 #include "Component.hpp"
 
 #include "projectX/utility/TupleForEach.hpp"
-
+#include <iostream>
 namespace px {
 	ComponentsManager::ComponentsManager(Object* owner) :
 		owner{ owner } {
 
+	}
+
+	ComponentsManager::ComponentsManager(ComponentsManager && componentsManager) :
+		components{ std::move(componentsManager.components) },
+		owner{componentsManager.owner}
+	{
+		
 	}
 
 	ComponentsManager::~ComponentsManager() {
@@ -29,5 +36,10 @@ namespace px {
 	void ComponentsManager::draw(sf::RenderTarget & target, sf::RenderStates states) const {
 		for (auto& component : components)
 			target.draw(*component, states);
+	}
+	void ComponentsManager::setOwner(Object * newOwner) {
+		owner = newOwner;
+		for (auto& component : components)
+			component->setParent(newOwner);
 	}
 }

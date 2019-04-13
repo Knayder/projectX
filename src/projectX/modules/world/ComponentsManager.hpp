@@ -20,6 +20,8 @@ namespace px {
 
 		ComponentsManager(Object* owner);
 
+		ComponentsManager(ComponentsManager&& componentsManager);
+
 		~ComponentsManager();
 
 		void update(float deltaTime);
@@ -27,6 +29,8 @@ namespace px {
 		void input(const sf::Event& event);
 
 		virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const override;
+
+		void setOwner(Object* newOwner);
 
 		template<typename... Deps>
 		void grantAccessToComponent(ComponentBase<Deps...>* component) {
@@ -40,8 +44,8 @@ namespace px {
 				return *found;
 			T* component = new T(args...);
 			component->setParent(owner);
-			grantAccessToComponent(component);
 			components.push_back(component);
+			grantAccessToComponent(component);
 			ComponentsTracker_t::checkIfTracked(component);
 			return *component;
 		}

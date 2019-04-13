@@ -10,6 +10,10 @@ namespace px::Components {
 		Sprite();
 
 		virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const override;
+
+		void update(float deltaTime) override {
+
+		}
 	private:
 		sf::Sprite sprite;
 	};

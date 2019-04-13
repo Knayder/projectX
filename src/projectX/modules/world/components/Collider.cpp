@@ -1,4 +1,5 @@
 #include "Collider.hpp"
+#include "projectX/modules/world/Object.hpp"
 
 namespace px::Components {
 	Collider::Collider() {
@@ -16,6 +17,20 @@ namespace px::Components {
 	void Collider::setOffset(const sf::Vector2f & offset) {
 		this->offset = offset;
 		d_hitbox.setPosition(offset);
+	}
+	bool Collider::contains(const Collider & collider) const {
+		sf::Vector2f pos = getParent()->getPosition() + offset;
+		sf::Vector2f colPos = collider.getParent()->getPosition() + collider.offset;
+
+		if (
+			pos.x + size.x >= colPos.x &&
+			pos.x <= colPos.x + collider.size.x &&
+			pos.y + size.y >= colPos.y &&
+			pos.y <= colPos.y + collider.size.y
+			) {
+			return true;
+		}
+		return false;
 	}
 	const sf::Vector2f & Collider::getSize() const {
 		return size;
