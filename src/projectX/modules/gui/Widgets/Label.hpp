@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Widget.hpp"
+#include "../Widget.hpp"
 
 namespace px {
 
