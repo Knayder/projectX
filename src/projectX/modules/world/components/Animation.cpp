@@ -1,74 +1,82 @@
 #include "Animation.hpp"
 
 namespace px::Components {
-
-	Animation::Animation()
+	void Animation::run()
 	{
+		state = State::Running;
+		reset();
 	}
-	void Animation::setTexture(Texture_t texture)
+	void Animation::stop()
 	{
+		state = State::Stopped;
+		reset();
 	}
-	void Animation::setFrames(int nFrames)
+	void Animation::pause()
 	{
-		setFrames(nFrames, 1);
+		state = State::Paused;
 	}
-	void Animation::setFrames(int xFrames, int yFrames)
+	void Animation::resume()
 	{
-		frames.clear();
-		const auto texSize = texture->getSize();
-		const int width = texSize.x / xFrames;
-		const int height = texSize.y / yFrames;
-
-		for (int y = 0; y < yFrames; ++y)
+		state = State::Running;
+	}
+	void Animation::reset()
+	{
+		currentTime = 0.f;
+		iCurrentFrame = 0;
+		isFrameChanged = true;
+	}
+	void Animation::update(float dt)
+	{
+		switch (state)
 		{
-			for (int x = 0; x < xFrames; x++)
-			{
-				sf::IntRect frame;
-				frame.width = width;
-				frame.height = height;
-
-				frame.left = x * width;
-				frame.top = y * height;
-
-				frames.push_back(frame);
-			}
+		case px::Components::Animation::WithoutData:
+			break;
+		case px::Components::Animation::Paused:
+			break;
+		case px::Components::Animation::Stopped:
+			break;
+		case px::Components::Animation::Running:
+			advance(dt);
+			if (isFrameChanged)
+				applyToSprite();
+			break;
+		default:
+			break;
 		}
 	}
-	void Animation::setFrames(sf::IntRect & frameRect)
+	void Animation::setData(const anim::AnimationData & data)
 	{
-		const auto texSize = texture->getSize();
-		int xFrames = texSize.x / frameRect.width;
-		int yFrames = (texSize.y - frameRect.top - frameRect.height) / frameRect.height;
-		int nFirstRowFrames = (texSize.x - frameRect.left) / frameRect.width;
-
-		int nFrames = xFrames * yFrames + nFirstRowFrames;
-
-		setFrames(frameRect, nFrames);
+		this->data = data;
+		state = State::Stopped;
 	}
-	void Animation::setFrames(sf::IntRect & frameRect, int nFrames)
+	void Animation::applyToSprite()
 	{
-		const auto texSize = texture->getSize();
-		int xFrames = texSize.x / frameRect.width;
-		int yFrames = (texSize.y - frameRect.top) / frameRect.height;
-
-		int nFirstRowFrames = (texSize.x - frameRect.left) / frameRect.width;
-		int n = 0;
-		for (int x = 0; x < nFirstRowFrames && n < nFrames; x++, ++n)
+		getComponent<Sprite>().setTexture(data.texture, data.getFrame(iCurrentFrame));
+		isFrameChanged = false;
+	}
+	void Animation::advance(float dt)
+	{
+		currentTime += dt;
+		const int iNextFrame = getNextFrameIndex();
+		if (!isLooped && iNextFrame >= data.size())
 		{
-			auto frame = frameRect;
-			frame.left += x * frameRect.width;
-			frames.push_back(frame);
+			stop();
 		}
-
-		for (int y = 1; y < yFrames; y++)
+		else if (iNextFrame != iCurrentFrame)
 		{
-			for (int x = 0; x < xFrames && n < nFrames; x++, ++n)
-			{
-				sf::IntRect frame = frameRect;
-				frame.left = x * frameRect.width;
-				frame.top = y * frameRect.height + frameRect.top;
-				frames.push_back(frame);
-			}
+			iCurrentFrame = iNextFrame;
+			isFrameChanged = true;
 		}
+	}
+	int Animation::getNextFrameIndex() const
+	{
+		const float wholeTime = data.getWholeAnimationTime();
+		const int nFrames = data.size();
+		int nextFrameIndex = int( (currentTime / wholeTime) * float(nFrames) );
+		if (isLooped)
+		{
+			return nextFrameIndex % nFrames;
+		}
+		return nextFrameIndex;
 	}
 }

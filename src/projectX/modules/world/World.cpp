@@ -4,6 +4,7 @@
 #include "components/RigidBody.hpp"
 #include "components/Collider.hpp"
 #include "ComponentsTracker.hpp"
+#include "components/Animation.hpp"
 
 
 namespace px {
@@ -20,6 +21,16 @@ namespace px {
 
 		col.setSize({ 100.f, 170.f });
 		col.setOffset({ 40.f, 10.f });
+
+		auto& anim = obj.addComponent<Components::Animation>();
+
+		auto tex = ResourceManager::instance().acquire<sf::Texture>("assets/animation_test.png");
+		Components::anim::AnimationData animData(tex);
+		animData.setFrames(8, 2);
+		animData.setPerFrameTime(1.f / 4.f);
+		anim.setData(animData);
+		anim.isLooped = true;
+		anim.run();
 
 		
 		auto& obj2 = scene.addObject();

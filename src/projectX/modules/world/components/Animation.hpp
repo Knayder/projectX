@@ -26,6 +26,8 @@ namespace px::Components {
 	public:
 		bool isLooped = false;
 
+		Animation() : data{ Texture_t{} } {}
+
 		void run();
 		void stop();
 		void resume();
@@ -33,10 +35,13 @@ namespace px::Components {
 		void reset();
 
 		void update(float dt) override;
+
+		void setData(const anim::AnimationData& data);
 		
 	private:
 
 		void applyToSprite();
 		void advance(float dt);
+		int getNextFrameIndex() const;
 	};
 }

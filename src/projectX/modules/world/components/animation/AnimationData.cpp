@@ -1,11 +1,18 @@
 #include "AnimationData.hpp"
 
 
-namespace px::Component::anim {
+namespace px::Components::anim {
 	AnimationData::AnimationData(const Texture_t & texture)
 		:
 		texture(texture)
 	{
+	}
+	AnimationData & AnimationData::operator=(const AnimationData & rhs)
+	{
+		frames = rhs.frames;
+		wholeTime = rhs.wholeTime;
+		texture = rhs.texture;
+		return *this;
 	}
 	void AnimationData::setFrames(int nFrames)
 	{
