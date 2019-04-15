@@ -11,3 +11,6 @@ Debug/*
 CMakeLists.txt
 
 assets/*
+
+#Tested Textures
+/Textures/

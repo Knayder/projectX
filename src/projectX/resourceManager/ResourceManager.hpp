@@ -10,7 +10,7 @@
 #include <SFML/System/NonCopyable.hpp>
 
 
-#include "ResourceHolder.hpp"
+#include "PrivateUtility/ResourceHolder.hpp"
 
 namespace px {
 	class ResourceManager : public sf::NonCopyable

@@ -7,7 +7,7 @@
 
 #include <SFML/System/NonCopyable.hpp>
 
-#include "ResourceLoader.hpp"
+#include "SingleResourceLoader.hpp"
 
 namespace px {
 	template <typename Res>
@@ -23,7 +23,7 @@ namespace px {
 		std::string extention;
 
 		ResourceContainer_t resources;
-		ResourceLoader<Res> loader;
+		SingleResourceLoader<Res> loader;
 
 	public:
 		ResourceHolder() = default;
@@ -32,8 +32,7 @@ namespace px {
 			:
 			folderName("Resources/" + folder + "/"),
 			extention("." + extention),
-			isExtentionSet{ true },
-			ResourceHolder()
+			isExtentionSet{ true }
 		{
 		}
 

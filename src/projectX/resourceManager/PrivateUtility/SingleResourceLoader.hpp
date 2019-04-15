@@ -6,7 +6,7 @@
 
 namespace px {
 	template <typename Res>
-	struct ResourceLoader
+	struct SingleResourceLoader
 	{
 		using Resource_t = std::shared_ptr<const Res>;
 
@@ -17,7 +17,7 @@ namespace px {
 			if (!loadedProperly)
 			{
 				std::string errorMessage{ "Cannot load \"" + name + "\" file." };
-				throw std::exception(errorMessage.c_str());
+				throw std::runtime_error(errorMessage.c_str());
 			}
 			return std::make_shared<const Res>(res);
 		}
