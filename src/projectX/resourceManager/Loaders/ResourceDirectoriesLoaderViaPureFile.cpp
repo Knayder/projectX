@@ -7,11 +7,12 @@ namespace px::rm {
 	void ResourceDirectoriesLoaderViaPureFile::preload(const std::string & fileName) const
 	{
 		in.open(fileName);
-		if (in.bad())
+		if (!in.good())
 		{
 			std::string errMsg = "ResourceDirectoriesLoaderViaPureFile could not open " + fileName + ".";
 			throw std::runtime_error(errMsg.c_str());
 		}
+		in.exceptions(std::ifstream::failbit | std::ifstream::badbit);
 		in >> folderName;
 	}
 	ResourceDirectory ResourceDirectoriesLoaderViaPureFile::getNextDirectory() const
