@@ -1,7 +1,7 @@
 #include "SpriteAnimationData.hpp"
 
 
-namespace px::Components::anim {
+namespace px::anim {
 	SpriteAnimationData::SpriteAnimationData(const Texture_t & texture)
 		:
 		texture(texture)

@@ -25,7 +25,7 @@ namespace px {
 		auto& anim = obj.addComponent<Components::SpriteAnimation>();
 
 		auto tex = ResourceManager::instance().acquire<sf::Texture>("assets/animation_test.png");
-		static Components::anim::SpriteAnimationData animData(tex);
+		static anim::SpriteAnimationData animData(tex);
 		animData.setFrames(8, 2);
 		animData.setPerFrameTime(1.f / 4.f);
 		anim.setData(animData);
