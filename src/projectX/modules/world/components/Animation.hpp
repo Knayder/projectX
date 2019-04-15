@@ -14,7 +14,9 @@ namespace px::Components {
 		int iCurrentFrame = 0;
 		float currentTime = 0.f;
 		bool isFrameChanged = false;
-		anim::AnimationData data;
+		bool mustStopAfterThisFrame = false;
+		const anim::AnimationData* data = nullptr;
+		bool isLooped = false;
 		
 		enum State {
 			WithoutData,
@@ -24,9 +26,11 @@ namespace px::Components {
 		} state = State::WithoutData;
 
 	public:
-		bool isLooped = false;
+		void makeLooped() { isLooped = true; }
+		void makeNotLooped() { isLooped = false; }
+		bool isAnimationLooped() const { return isLooped; }
 
-		Animation() : data{ Texture_t{} } {}
+		Animation() = default;
 
 		void run();
 		void stop();

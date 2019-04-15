@@ -25,11 +25,11 @@ namespace px {
 		auto& anim = obj.addComponent<Components::Animation>();
 
 		auto tex = ResourceManager::instance().acquire<sf::Texture>("assets/animation_test.png");
-		Components::anim::AnimationData animData(tex);
-		animData.setFrames(8, 2);
+		static Components::anim::AnimationData animData(tex);
+		animData.setFrames(sf::IntRect{216, 0, 108, 140}, 10);
 		animData.setPerFrameTime(1.f / 4.f);
 		anim.setData(animData);
-		anim.isLooped = true;
+		anim.makeLooped();
 		anim.run();
 
 		

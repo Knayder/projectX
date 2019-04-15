@@ -7,27 +7,20 @@ namespace px::Components::anim {
 		texture(texture)
 	{
 	}
-	AnimationData & AnimationData::operator=(const AnimationData & rhs)
-	{
-		frames = rhs.frames;
-		wholeTime = rhs.wholeTime;
-		texture = rhs.texture;
-		return *this;
-	}
 	void AnimationData::setFrames(int nFrames)
 	{
 		setFrames(nFrames, 1);
 	}
-	void AnimationData::setFrames(int xFrames, int yFrames)
+	void AnimationData::setFrames(int nRowFrames, int nColumnFrames)
 	{
 		frames.clear();
 		const auto texSize = texture->getSize();
-		const int width = texSize.x / xFrames;
-		const int height = texSize.y / yFrames;
+		const int width = texSize.x / nRowFrames;
+		const int height = texSize.y / nColumnFrames;
 
-		for (int y = 0; y < yFrames; ++y)
+		for (int y = 0; y < nColumnFrames; ++y)
 		{
-			for (int x = 0; x < xFrames; x++)
+			for (int x = 0; x < nRowFrames; x++)
 			{
 				sf::IntRect frame;
 				frame.width = width;
@@ -40,22 +33,22 @@ namespace px::Components::anim {
 			}
 		}
 	}
-	void AnimationData::setFrames(sf::IntRect & frameRect)
+	void AnimationData::setFrames(const sf::IntRect & frameRect)
 	{
 		const auto texSize = texture->getSize();
-		int xFrames = texSize.x / frameRect.width;
-		int yFrames = (texSize.y - frameRect.top - frameRect.height) / frameRect.height;
+		int nRowFrames = texSize.x / frameRect.width;
+		int nColumnFrames = (texSize.y - frameRect.top - frameRect.height) / frameRect.height;
 		int nFirstRowFrames = (texSize.x - frameRect.left) / frameRect.width;
 
-		int nFrames = xFrames * yFrames + nFirstRowFrames;
+		int nFrames = nRowFrames * nColumnFrames + nFirstRowFrames;
 
 		setFrames(frameRect, nFrames);
 	}
-	void AnimationData::setFrames(sf::IntRect & frameRect, int nFrames)
+	void AnimationData::setFrames(const sf::IntRect & frameRect, int nFrames)
 	{
 		const auto texSize = texture->getSize();
-		int xFrames = texSize.x / frameRect.width;
-		int yFrames = (texSize.y - frameRect.top) / frameRect.height;
+		int nRowFrames = texSize.x / frameRect.width;
+		int nColumnFrames = (texSize.y - frameRect.top) / frameRect.height;
 
 		int nFirstRowFrames = (texSize.x - frameRect.left) / frameRect.width;
 		int n = 0;
@@ -66,9 +59,9 @@ namespace px::Components::anim {
 			frames.push_back(frame);
 		}
 
-		for (int y = 1; y < yFrames; y++)
+		for (int y = 1; y < nColumnFrames; y++)
 		{
-			for (int x = 0; x < xFrames && n < nFrames; x++, ++n)
+			for (int x = 0; x < nRowFrames && n < nFrames; x++, ++n)
 			{
 				sf::IntRect frame = frameRect;
 				frame.left = x * frameRect.width;
@@ -77,6 +70,7 @@ namespace px::Components::anim {
 			}
 		}
 	}
+
 	void AnimationData::setAnimationTime(float time)
 	{
 		wholeTime = time;

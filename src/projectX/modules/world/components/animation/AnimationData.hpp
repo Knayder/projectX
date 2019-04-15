@@ -9,16 +9,14 @@ namespace px::Components::anim {
 		std::vector<sf::IntRect> frames;
 
 		float wholeTime = 0.f;
+		const Texture_t texture;
 	public:
-		Texture_t texture;
 		AnimationData(const Texture_t & texture);
 
-		AnimationData& operator=(const AnimationData& rhs);
-
 		void setFrames(int nFrames);
-		void setFrames(int xFrames, int yFrames);
-		void setFrames(sf::IntRect& frameRect);
-		void setFrames(sf::IntRect& frameRect, int nFrames);
+		void setFrames(int nRowFrames, int nColumnFrames);
+		void setFrames(const sf::IntRect& frameRect);
+		void setFrames(const sf::IntRect& frameRect, int nFrames);
 
 		void setAnimationTime(float time);
 		void setPerFrameTime(float time);
@@ -26,8 +24,12 @@ namespace px::Components::anim {
 		float getWholeAnimationTime() const;
 		float getPerFrameTime() const;
 
-		int size() const {
+		int getNumberOfFrames() const {
 			return (int)frames.size();
+		}
+
+		const Texture_t& getTexture() const {
+			return texture;
 		}
 
 		const auto begin() { return frames.cbegin(); }
