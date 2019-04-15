@@ -11,16 +11,13 @@ namespace px {
 		void runTests()
 		{
 			auto& manager = ResourceManager::instance();
-			FullDirectoryResourceLoader loader(manager);
-			TargetedResourceLoader targetLoader(manager);
 
-			targetLoader.load("Textures/textures.txt");
-
+			//targetLoader.load("Textures/textures.txt");
+			manager.load<sf::Texture>("assets/test.png");
 			//loader.loadFromDirectory("Textures");
 			try
 			{
-				auto tex = manager.get<sf::Texture>("Textures/Test1.png");
-				manager.get<sf::Texture>("Textures/SubTex/TestSub.png");
+				auto tex = manager.get<sf::Texture>("assets/test.png");
 				std::cout << "Loaded\n";
 
 				manager.deleteAditional();
