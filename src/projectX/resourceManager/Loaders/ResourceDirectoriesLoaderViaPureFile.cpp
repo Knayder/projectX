@@ -2,7 +2,7 @@
 
 #include <exception>
 
-namespace px {
+namespace px::rm {
 
 	void ResourceDirectoriesLoaderViaPureFile::preload(const std::string & fileName) const
 	{
@@ -21,7 +21,7 @@ namespace px {
 		directory.fileName = folderName + directory.fileName;
 		int type;
 		in >> type;
-		directory.type = static_cast<ResType>(type);
+		directory.type = static_cast<rm::prv::ResType>(type);
 		if (in.eof())
 			empty = true;
 		return directory;

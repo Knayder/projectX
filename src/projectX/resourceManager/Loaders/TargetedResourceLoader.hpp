@@ -1,11 +1,11 @@
 #pragma once
 
-#include "../PrivateUtility/ResTypes.hpp"
+#include "../PrivateUtility/SupportedResourceTypes.hpp"
 #include "../ResourceManager.hpp"
 
 #include "ResourceDirectoriesLoaderViaPureFile.hpp"
 
-namespace px {
+namespace px::rm {
 	class TargetedResourceLoader
 	{
 	private:

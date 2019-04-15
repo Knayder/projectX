@@ -1,6 +1,6 @@
 #include "TargetedResourceLoader.hpp"
 
-namespace px {
+namespace px::rm {
 	TargetedResourceLoader::TargetedResourceLoader(ResourceManager & manager)
 		:
 		manager(manager)
@@ -14,16 +14,16 @@ namespace px {
 			auto nextDir = dirLoader.getNextDirectory();
 			switch (nextDir.type)
 			{
-			case ResType::Texture:
+			case prv::ResType::Texture:
 				manager.load<sf::Texture>(nextDir.fileName);
 				break;
-			case ResType::Font:
+			case prv::ResType::Font:
 				manager.load<sf::Font>(nextDir.fileName);
 				break;
-			case ResType::SoundBuffer:
+			case prv::ResType::SoundBuffer:
 				manager.load<sf::SoundBuffer>(nextDir.fileName);
 				break;
-			case ResType::NotSupportedType:
+			case prv::ResType::NotSupportedType:
 				break;
 			default:
 				break;

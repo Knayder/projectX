@@ -5,7 +5,7 @@
 
 #include "../Loaders/TargetedResourceLoader.hpp"
 
-namespace px {
+namespace px::rm::prv {
 	class ResourceManagerTests {
 	public:
 		void runTests()

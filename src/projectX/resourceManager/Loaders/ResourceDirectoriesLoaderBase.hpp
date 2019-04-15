@@ -1,11 +1,11 @@
 #pragma once
 #include <string>
-#include "../PrivateUtility/ResTypes.hpp"
+#include "../PrivateUtility/SupportedResourceTypes.hpp"
 
-namespace px {
+namespace px::rm {
 	struct ResourceDirectory {
 		std::string fileName;
-		ResType type;
+		prv::ResType type;
 	};
 	class ResourceDirectoriesLoaderBase
 	{

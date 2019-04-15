@@ -9,7 +9,7 @@
 
 #include "SingleResourceLoader.hpp"
 
-namespace px {
+namespace px::rm::prv {
 	template <typename Res>
 	class ResourceHolder : public sf::NonCopyable
 	{
