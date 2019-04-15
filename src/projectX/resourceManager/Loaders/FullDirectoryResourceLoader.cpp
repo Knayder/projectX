@@ -1,10 +1,17 @@
 #include "FullDirectoryResourceLoader.hpp"
 
+#ifdef __GNUG__
+#include <experimental/filesystem>
+namespace fs = std::experimental::filesystem;
+#else
 #include <filesystem>
-#include<algorithm>
+namespace fs = std::filesystem;
+#endif
+
+#include <algorithm>
 
 
-namespace px {
+namespace px::rm {
 
 	FullDirectoryResourceLoader::FullDirectoryResourceLoader(ResourceManager& manager)
 		:
@@ -14,8 +21,6 @@ namespace px {
 
 	void FullDirectoryResourceLoader::loadFromDirectory(const std::string & directoryPath)
 	{
-		namespace fs = std::filesystem;
-
 		for (const auto& subDirectory : fs::recursive_directory_iterator(directoryPath))
 		{
 			auto path = subDirectory.path().string();
@@ -32,7 +37,7 @@ namespace px {
 	}
 
 
-	FullDirectoryResourceLoader::ResType FullDirectoryResourceLoader::getTypeByPath(const std::string & path) const
+	rm::prv::ResType FullDirectoryResourceLoader::getTypeByPath(const std::string & path) const
 	{
 		const auto extension = getExtension(path);
 		if (extension == "jpg" || extension == "png" || extension == "bmp")
@@ -54,16 +59,16 @@ namespace px {
 		auto resType = getTypeByPath(path);
 		switch (resType)
 		{
-		case px::FullDirectoryResourceLoader::Texture:
+		case ResType::Texture:
 			manager.load<sf::Texture>(path);
 			break;
-		case px::FullDirectoryResourceLoader::Font:
+		case ResType::Font:
 			manager.load<sf::Font>(path);
 			break;
-		case px::FullDirectoryResourceLoader::SoundBuffer:
+		case ResType::SoundBuffer:
 			manager.load<sf::SoundBuffer>(path);
 			break;
-		case px::FullDirectoryResourceLoader::NotSupportedType:
+		case ResType::NotSupportedType:
 			break;
 		default:
 			break;

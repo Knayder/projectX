@@ -4,25 +4,20 @@
 #include "projectX/utility/TypeTraits.hpp"
 #include "projectX/utility/TupleForEach.hpp"
 
-#include<SFML/Graphics/Texture.hpp>
-#include<SFML/Graphics/Font.hpp>
-#include<SFML/Audio/SoundBuffer.hpp>
 #include <SFML/System/NonCopyable.hpp>
 
-
-#include "ResourceHolder.hpp"
+#include "PrivateUtility/ResourceHolder.hpp"
+#include "PrivateUtility/SupportedResourceTypes.hpp"
 
 namespace px {
 	class ResourceManager : public sf::NonCopyable
 	{
-		template <typename... Reses>
-		using Holders_t = std::tuple< ResourceHolder< Reses >... >;
-		using ResourceHolders_t = Holders_t< sf::Texture, sf::Font, sf::SoundBuffer >;
 	public:
-		template <typename Res>
-		using Resource_t = std::shared_ptr< const Res >;
+		template<typename Res>
+		using Resource_t = rm::prv::Resource_t<Res>;
+		
 	private:
-		ResourceHolders_t holders;
+		rm::prv::ResourceHolders_t holders;
 
 		 ResourceManager() = default;
 
@@ -61,22 +56,22 @@ namespace px {
 
 	private:
 		template <typename Res>
-		ResourceHolder<Res>& getHolder()
+		rm::prv::ResourceHolder<Res>& getHolder()
 		{
+			using namespace rm::prv;
 			static_assert(tt::tuple_contains_type< ResourceHolder<Res>, ResourceHolders_t >(),
 				"Resource Manager doesn't support this type of resource");
 			return std::get<ResourceHolder<Res>>(holders);
 		}
 		template <typename Res>
-		const ResourceHolder<Res>& getHolder() const
+		const rm::prv::ResourceHolder<Res>& getHolder() const
 		{
+			using namespace rm::prv;
 			static_assert(tt::tuple_contains_type< ResourceHolder<Res>, ResourceHolders_t >(),
 				"Resource Manager doesn't support this type of resource");
 			return std::get<ResourceHolder<Res>>(holders);
 		}
 	};
 
-	using Texture_t = ResourceManager::Resource_t<sf::Texture>;
-	using Font_t = ResourceManager::Resource_t<sf::Font>;
-	using SoundBuffer_t = ResourceManager::Resource_t<sf::SoundBuffer>;
+	
 }
