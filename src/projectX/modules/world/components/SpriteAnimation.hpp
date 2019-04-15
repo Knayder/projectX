@@ -5,17 +5,17 @@
 #include "../Object.hpp"
 #include "Sprite.hpp"
 
-#include "animation/AnimationData.hpp"
+#include "animation/SpriteAnimationData.hpp"
 
 namespace px::Components {
-	class Animation : public ComponentBase<Sprite>
+	class SpriteAnimation : public ComponentBase<Sprite>
 	{
 	private:
 		int iCurrentFrame = 0;
 		float currentTime = 0.f;
 		bool isFrameChanged = false;
 		bool mustStopAfterThisFrame = false;
-		const anim::AnimationData* data = nullptr;
+		const anim::SpriteAnimationData* data = nullptr;
 		bool isLooped = false;
 		
 		enum State {
@@ -30,7 +30,7 @@ namespace px::Components {
 		void makeNotLooped() { isLooped = false; }
 		bool isAnimationLooped() const { return isLooped; }
 
-		Animation() = default;
+		SpriteAnimation() = default;
 
 		void run();
 		void stop();
@@ -40,7 +40,7 @@ namespace px::Components {
 
 		void update(float dt) override;
 
-		void setData(const anim::AnimationData& data);
+		void setData(const anim::SpriteAnimationData& data);
 		
 	private:
 

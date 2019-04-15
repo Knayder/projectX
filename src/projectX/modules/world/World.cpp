@@ -4,7 +4,7 @@
 #include "components/RigidBody.hpp"
 #include "components/Collider.hpp"
 #include "ComponentsTracker.hpp"
-#include "components/Animation.hpp"
+#include "components/SpriteAnimation.hpp"
 
 
 namespace px {
@@ -22,14 +22,14 @@ namespace px {
 		col.setSize({ 100.f, 170.f });
 		col.setOffset({ 40.f, 10.f });
 
-		auto& anim = obj.addComponent<Components::Animation>();
+		auto& anim = obj.addComponent<Components::SpriteAnimation>();
 
 		auto tex = ResourceManager::instance().acquire<sf::Texture>("assets/animation_test.png");
-		static Components::anim::AnimationData animData(tex);
-		animData.setFrames(sf::IntRect{216, 0, 108, 140}, 10);
+		static Components::anim::SpriteAnimationData animData(tex);
+		animData.setFrames(8, 2);
 		animData.setPerFrameTime(1.f / 4.f);
 		anim.setData(animData);
-		anim.makeLooped();
+		//anim.makeLooped();
 		anim.run();
 
 		

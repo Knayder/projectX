@@ -3,7 +3,7 @@
 
 
 namespace px::Components::anim {
-	class AnimationData
+	class SpriteAnimationData
 	{
 	private:
 		std::vector<sf::IntRect> frames;
@@ -11,7 +11,7 @@ namespace px::Components::anim {
 		float wholeTime = 0.f;
 		const Texture_t texture;
 	public:
-		AnimationData(const Texture_t & texture);
+		SpriteAnimationData(const Texture_t & texture);
 
 		void setFrames(int nFrames);
 		void setFrames(int nRowFrames, int nColumnFrames);

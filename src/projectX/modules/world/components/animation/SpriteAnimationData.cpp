@@ -1,17 +1,17 @@
-#include "AnimationData.hpp"
+#include "SpriteAnimationData.hpp"
 
 
 namespace px::Components::anim {
-	AnimationData::AnimationData(const Texture_t & texture)
+	SpriteAnimationData::SpriteAnimationData(const Texture_t & texture)
 		:
 		texture(texture)
 	{
 	}
-	void AnimationData::setFrames(int nFrames)
+	void SpriteAnimationData::setFrames(int nFrames)
 	{
 		setFrames(nFrames, 1);
 	}
-	void AnimationData::setFrames(int nRowFrames, int nColumnFrames)
+	void SpriteAnimationData::setFrames(int nRowFrames, int nColumnFrames)
 	{
 		frames.clear();
 		const auto texSize = texture->getSize();
@@ -33,7 +33,7 @@ namespace px::Components::anim {
 			}
 		}
 	}
-	void AnimationData::setFrames(const sf::IntRect & frameRect)
+	void SpriteAnimationData::setFrames(const sf::IntRect & frameRect)
 	{
 		const auto texSize = texture->getSize();
 		int nRowFrames = texSize.x / frameRect.width;
@@ -44,7 +44,7 @@ namespace px::Components::anim {
 
 		setFrames(frameRect, nFrames);
 	}
-	void AnimationData::setFrames(const sf::IntRect & frameRect, int nFrames)
+	void SpriteAnimationData::setFrames(const sf::IntRect & frameRect, int nFrames)
 	{
 		const auto texSize = texture->getSize();
 		int nRowFrames = texSize.x / frameRect.width;
@@ -71,19 +71,19 @@ namespace px::Components::anim {
 		}
 	}
 
-	void AnimationData::setAnimationTime(float time)
+	void SpriteAnimationData::setAnimationTime(float time)
 	{
 		wholeTime = time;
 	}
-	void AnimationData::setPerFrameTime(float time)
+	void SpriteAnimationData::setPerFrameTime(float time)
 	{
 		wholeTime = time * float(frames.size());
 	}
-	float AnimationData::getWholeAnimationTime() const
+	float SpriteAnimationData::getWholeAnimationTime() const
 	{
 		return wholeTime;
 	}
-	float AnimationData::getPerFrameTime() const
+	float SpriteAnimationData::getPerFrameTime() const
 	{
 		return wholeTime / float(frames.size());
 	}

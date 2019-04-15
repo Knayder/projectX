@@ -1,42 +1,42 @@
-#include "Animation.hpp"
+#include "SpriteAnimation.hpp"
 
 namespace px::Components {
-	void Animation::run()
+	void SpriteAnimation::run()
 	{
 		state = State::Running;
 		reset();
 	}
-	void Animation::stop()
+	void SpriteAnimation::stop()
 	{
 		state = State::Stopped;
 		reset();
 	}
-	void Animation::pause()
+	void SpriteAnimation::pause()
 	{
 		state = State::Paused;
 	}
-	void Animation::resume()
+	void SpriteAnimation::resume()
 	{
 		state = State::Running;
 	}
-	void Animation::reset()
+	void SpriteAnimation::reset()
 	{
 		currentTime = 0.f;
 		iCurrentFrame = 0;
 		isFrameChanged = true;
 		mustStopAfterThisFrame = false;
 	}
-	void Animation::update(float dt)
+	void SpriteAnimation::update(float dt)
 	{
 		switch (state)
 		{
-		case px::Components::Animation::WithoutData:
+		case px::Components::SpriteAnimation::WithoutData:
 			break;
-		case px::Components::Animation::Paused:
+		case px::Components::SpriteAnimation::Paused:
 			break;
-		case px::Components::Animation::Stopped:
+		case px::Components::SpriteAnimation::Stopped:
 			break;
-		case px::Components::Animation::Running:
+		case px::Components::SpriteAnimation::Running:
 			advance(dt);
 			if (isFrameChanged)
 				applyToSprite();
@@ -45,12 +45,12 @@ namespace px::Components {
 			break;
 		}
 	}
-	void Animation::setData(const anim::AnimationData & data)
+	void SpriteAnimation::setData(const anim::SpriteAnimationData & data)
 	{
 		this->data = &data;
 		state = State::Stopped;
 	}
-	void Animation::applyToSprite()
+	void SpriteAnimation::applyToSprite()
 	{
 		getComponent<Sprite>().setTexture(data->getTexture(), data->getFrame(iCurrentFrame));
 		isFrameChanged = false;
@@ -59,25 +59,21 @@ namespace px::Components {
 			stop();
 		}
 	}
-	void Animation::advance(float dt)
+	void SpriteAnimation::advance(float dt)
 	{
 		currentTime += dt;
 		const int iNextFrame = getNextFrameIndex();
-		if (!isLooped && iNextFrame >= data->getNumberOfFrames())
-		{
-			stop();
-		}
-		else if (iNextFrame != iCurrentFrame)
+		if (iNextFrame != iCurrentFrame)
 		{
 			iCurrentFrame = iNextFrame;
 			isFrameChanged = true;
-			if (iNextFrame == data->getNumberOfFrames() - 1)
+			if (!isLooped && iNextFrame == data->getNumberOfFrames() - 1)
 			{
 				mustStopAfterThisFrame = true;
 			}
 		}
 	}
-	int Animation::getNextFrameIndex() const
+	int SpriteAnimation::getNextFrameIndex() const
 	{
 		const float wholeTime = data->getWholeAnimationTime();
 		const int nFrames = data->getNumberOfFrames();
@@ -86,6 +82,6 @@ namespace px::Components {
 		{
 			return nextFrameIndex % nFrames;
 		}
-		return std::max(nextFrameIndex, nFrames - 1);
+		return std::min(nextFrameIndex, nFrames - 1);
 	}
 }
