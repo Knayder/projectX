@@ -2,7 +2,7 @@
 #include "ResourceDirectoriesLoaderBase.hpp"
 #include <fstream>
 
-namespace px {
+namespace px::rm {
 	class ResourceDirectoriesLoaderViaPureFile : public ResourceDirectoriesLoaderBase
 	{
 	private:

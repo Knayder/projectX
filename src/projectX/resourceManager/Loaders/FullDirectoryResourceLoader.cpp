@@ -11,7 +11,7 @@ namespace fs = std::filesystem;
 #include <algorithm>
 
 
-namespace px {
+namespace px::rm {
 
 	FullDirectoryResourceLoader::FullDirectoryResourceLoader(ResourceManager& manager)
 		:
@@ -37,7 +37,7 @@ namespace px {
 	}
 
 
-	ResType FullDirectoryResourceLoader::getTypeByPath(const std::string & path) const
+	rm::prv::ResType FullDirectoryResourceLoader::getTypeByPath(const std::string & path) const
 	{
 		const auto extension = getExtension(path);
 		if (extension == "jpg" || extension == "png" || extension == "bmp")

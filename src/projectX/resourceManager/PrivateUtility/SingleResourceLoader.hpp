@@ -4,7 +4,7 @@
 #include <string>
 #include <exception>
 
-namespace px {
+namespace px::rm::prv {
 	template <typename Res>
 	struct SingleResourceLoader
 	{

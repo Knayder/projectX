@@ -10,7 +10,7 @@ Debug/*
 /cmake/
 CMakeLists.txt
 
-assets/*
-
 #Tested Textures
 /Textures/
+/assets/
+/assets/
