@@ -1,8 +1,8 @@
 #pragma once
-#include "../../../../resourceManager/ResourceManager.hpp"
+#include "projectX/resourceManager/PrivateUtility/SupportedResourceTypes.hpp"
 
 
-namespace px::Components::anim {
+namespace px::anim {
 	class SpriteAnimationData
 	{
 	private:

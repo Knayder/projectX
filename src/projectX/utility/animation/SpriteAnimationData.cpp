@@ -1,7 +1,7 @@
 #include "SpriteAnimationData.hpp"
+#include <exception>
 
-
-namespace px::Components::anim {
+namespace px::anim {
 	SpriteAnimationData::SpriteAnimationData(const Texture_t & texture)
 		:
 		texture(texture)
@@ -77,6 +77,8 @@ namespace px::Components::anim {
 	}
 	void SpriteAnimationData::setPerFrameTime(float time)
 	{
+		if (frames.empty())
+			throw std::out_of_range("You should add frames before time per frame in SpriteAnimationData.");
 		wholeTime = time * float(frames.size());
 	}
 	float SpriteAnimationData::getWholeAnimationTime() const
@@ -85,6 +87,8 @@ namespace px::Components::anim {
 	}
 	float SpriteAnimationData::getPerFrameTime() const
 	{
+		if (frames.empty())
+			throw std::out_of_range("You cannot check frames per second without frames in SpriteAnimationData.");
 		return wholeTime / float(frames.size());
 	}
 }

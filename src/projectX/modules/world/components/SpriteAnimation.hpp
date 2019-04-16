@@ -5,7 +5,7 @@
 #include "../Object.hpp"
 #include "Sprite.hpp"
 
-#include "animation/SpriteAnimationData.hpp"
+#include "projectX/utility/animation/SpriteAnimationData.hpp"
 
 namespace px::Components {
 	class SpriteAnimation : public ComponentBase<Sprite>

@@ -3,6 +3,8 @@
 namespace px::Components {
 	void SpriteAnimation::run()
 	{
+		if (state == State::WithoutData)
+			return;
 		state = State::Running;
 		reset();
 	}
@@ -17,6 +19,8 @@ namespace px::Components {
 	}
 	void SpriteAnimation::resume()
 	{
+		if (state == State::WithoutData)
+			return;
 		state = State::Running;
 	}
 	void SpriteAnimation::reset()
