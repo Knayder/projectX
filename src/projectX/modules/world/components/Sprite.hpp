@@ -19,6 +19,7 @@ namespace px::Components {
 
 		void setTexture(const Texture_t& texture);
 		void setTexture(const Texture_t& texture, const sf::IntRect& textureRect);
+		void setScale(float scale);
 	private:
 		sf::Sprite sprite;
 		Texture_t texture;

@@ -12,34 +12,24 @@ namespace px {
 		renderTexture = &getModule<Renderer>().getLayer(Renderer::Layer::Game);
 		auto& scene = scenesManager.addScene("test");
 
-
+		
 		auto& obj = scene.addObject();
 		obj.setPosition({ 500.f, 500.f });
 		obj.addComponent<Components::Sprite>();
+		auto& anim = obj.addComponent<Components::SpriteAnimation>();
 		auto& plr = obj.addComponent<Components::PlayerController>();
 		auto& col = plr.getComponent<Components::RigidBody>().getComponent<Components::Collider>().getComponent<Components::RigidBody>().getComponent<Components::Collider>();
 
 		col.setSize({ 100.f, 170.f });
 		col.setOffset({ 40.f, 10.f });
 
-		auto& anim = obj.addComponent<Components::SpriteAnimation>();
-
-		auto tex = ResourceManager::instance().acquire<sf::Texture>("assets/animation_test.png");
-		static anim::SpriteAnimationData animData(tex);
-		animData.setFrames(8, 2);
-		animData.setPerFrameTime(1.f / 4.f);
-		anim.setData(animData);
-		//anim.makeLooped();
-		anim.run();
-
-		
 		auto& obj2 = scene.addObject();
 		obj2.addComponent<Components::Sprite>();
 		auto& col2 = obj2.addComponent<Components::Collider>();
 
 		col2.setSize({ 100.f, 170.f });
 		col2.setOffset({ 40.f, 10.f });
-
+		
 	}
 
 	void World::update(float deltaTime) {

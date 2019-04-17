@@ -1,5 +1,6 @@
-#include <vector>
+#pragma once
 
+#include <vector>
 
 #include "../Component.hpp"
 #include "../Object.hpp"

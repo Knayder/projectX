@@ -28,4 +28,8 @@ namespace px::Components {
 		}
 		sprite.setTextureRect(textureRect);
 	}
+	void Sprite::setScale(float scale)
+	{
+		sprite.setScale({ scale, scale });
+	}
 }
